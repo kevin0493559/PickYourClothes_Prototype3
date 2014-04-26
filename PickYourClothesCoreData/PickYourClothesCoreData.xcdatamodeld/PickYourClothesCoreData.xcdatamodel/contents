@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C64" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Belt" representedClassName="Belt" parentEntity="Clothes" syncable="YES">
+        <attribute name="style" optional="YES" attributeType="String" maxValueString="20" syncable="YES"/>
+        <attribute name="uniform" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+    </entity>
+    <entity name="Clothes" representedClassName="Clothes" syncable="YES">
+        <attribute name="brand" optional="YES" attributeType="String" maxValueString="15" spotlightIndexingEnabled="YES" syncable="YES"/>
+        <attribute name="brandseries" optional="YES" attributeType="String" maxValueString="100" syncable="YES"/>
+        <attribute name="color" optional="YES" attributeType="String" maxValueString="20" defaultValueString="not select" syncable="YES"/>
+        <attribute name="describe" optional="YES" attributeType="String" maxValueString="200" spotlightIndexingEnabled="YES" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Transformable" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="kindOf" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="landry" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" maxValueString="20" spotlightIndexingEnabled="YES" syncable="YES"/>
+        <attribute name="rate" optional="YES" attributeType="Float" maxValueString="5" defaultValueString="0" syncable="YES"/>
+        <attribute name="selectTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="useTime" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="belong" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="People" inverseName="owner" inverseEntity="People" syncable="YES"/>
+    </entity>
+    <entity name="Friends" representedClassName="Friends" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
+    </entity>
+    <entity name="Glass" representedClassName="Glass" parentEntity="Clothes" syncable="YES">
+        <attribute name="style" optional="YES" attributeType="String" maxValueString="10" syncable="YES"/>
+        <attribute name="uniform" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+    </entity>
+    <entity name="Glove" representedClassName="Glove" parentEntity="Clothes" syncable="YES"/>
+    <entity name="Jacketing" representedClassName="Jupe" parentEntity="Clothes" syncable="YES">
+        <attribute name="style" optional="YES" attributeType="String" maxValueString="20" syncable="YES"/>
+        <attribute name="uniform" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="usage" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Pants" representedClassName="Pants" parentEntity="Clothes" syncable="YES">
+        <attribute name="length" optional="YES" attributeType="Integer 32" minValueString="1" maxValueString="5" defaultValueString="1" syncable="YES"/>
+        <attribute name="style" optional="YES" attributeType="String" maxValueString="20" syncable="YES"/>
+        <attribute name="uniform" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="usage" optional="YES" attributeType="String" maxValueString="20" syncable="YES"/>
+    </entity>
+    <entity name="People" representedClassName="People" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="owner" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clothes" inverseName="belong" inverseEntity="Clothes" syncable="YES"/>
+    </entity>
+    <entity name="Shoes" representedClassName="Shoes" parentEntity="Clothes" syncable="YES">
+        <attribute name="style" optional="YES" attributeType="String" maxValueString="20" syncable="YES"/>
+        <attribute name="uniform" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="usage" optional="YES" attributeType="String" maxValueString="20" syncable="YES"/>
+    </entity>
+    <entity name="Umbrella" representedClassName="Umbrella" parentEntity="Clothes" syncable="YES">
+        <attribute name="usage" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Belt" positionX="-171" positionY="-27" width="128" height="73"/>
+        <element name="Clothes" positionX="-20" positionY="-288" width="128" height="238"/>
+        <element name="Friends" positionX="36" positionY="-63" width="128" height="73"/>
+        <element name="Glass" positionX="178" positionY="-280" width="128" height="73"/>
+        <element name="Glove" positionX="223" positionY="-153" width="128" height="45"/>
+        <element name="Jacketing" positionX="72" positionY="92" width="128" height="88"/>
+        <element name="Pants" positionX="241" positionY="92" width="128" height="103"/>
+        <element name="People" positionX="-180" positionY="-286" width="128" height="88"/>
+        <element name="Shoes" positionX="-99" positionY="90" width="128" height="88"/>
+        <element name="Umbrella" positionX="214" positionY="-45" width="128" height="58"/>
+    </elements>
+</model>
