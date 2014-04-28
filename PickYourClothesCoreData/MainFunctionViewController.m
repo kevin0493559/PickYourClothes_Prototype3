@@ -32,6 +32,9 @@
 @property (nonatomic) Clothes *cloth;
 @property (nonatomic) Clothes *pant;
 @property (nonatomic) Clothes *shoes;
+//@property (nonatomic, strong) NSManagedObjectID *clothID;
+//@property (nonatomic, strong) NSManagedObjectID *pantID;
+//@property (nonatomic, strong) NSManagedObjectID *shoeID;
 @end
 
 @implementation MainFunctionViewController
@@ -143,14 +146,23 @@
 
 }
 -(NSMutableArray *)generateFilterArray:(NSMutableArray *)initialArray{
+    NSMutableArray *initialArray2=[[NSMutableArray alloc]init];
+    for(Clothes *cloth in initialArray){
+        if ([cloth.useTime intValue]<5) {
+            //NSLog(@"this is %i",[cloth.useTime intValue]);
+           [initialArray2 addObject:cloth];
+        }
+    }
     NSMutableArray *filterArray=[[NSMutableArray alloc]init];
+    if([initialArray2 count]!=0){
     int count=0;
-    for (int i=0; i<[initialArray count]; i++) {
-        Clothes *cloth=initialArray[i];
+    for (int i=0; i<[initialArray2 count]; i++) {
+        Clothes *cloth=initialArray2[i];
         for (int j=0; j<cloth.rate.intValue+1; j++) {
-            filterArray[count]=initialArray[i];
+            filterArray[count]=initialArray2[i];
             count++;
         }
+    }
     }
     return filterArray;
 }
@@ -342,22 +354,27 @@
         case 1:
         { NSDate *now=[NSDate date];
             if(!self.lackOfClothes){
-                _cloth.selectTime=now;
-                _cloth.useTime=[NSNumber numberWithInt:1+[_cloth.useTime intValue]];
-                NSLog(@"it is %i",[_cloth.useTime intValue]);
+                [self save:_cloth atTime:now];
             }
             if(!self.lackOfPants){
-                _pant.selectTime=now;
-                 _pant.useTime=[NSNumber numberWithInt:1+[_pant.useTime intValue]];
+                [self save:_pant atTime:now];
             }
             if(!self.lackOfShoes){
-                _shoes.selectTime=now;
-                 _shoes.useTime=[NSNumber numberWithInt:1+[_shoes.useTime intValue]];
+                [self save:_shoes atTime:now];
             }
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
             break;
     }
 }
-
+-(void)save:(Clothes *)cloth atTime:(NSDate *)date{
+    NSManagedObjectID *clothID=[[NSManagedObjectID alloc]init];
+    clothID=[cloth objectID];
+    NSManagedObjectContext *moc=[kAppDelegate managedObjectContext];
+    NSManagedObject *object=[kAppDelegate.managedObjectContext objectWithID:clothID];
+    [object setValue:date forKeyPath:@"selectTime"];
+    [object setValue:[NSNumber numberWithInt:1+[cloth.useTime intValue]] forKeyPath:@"useTime"];
+    NSError *error;
+    [moc save:&error];
+}
 @end

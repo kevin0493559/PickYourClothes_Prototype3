@@ -9,7 +9,11 @@
 #import "PickYourClothesViewController.h"
 
 @interface PickYourClothesViewController ()
-
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong,nonatomic) NSFetchedResultsController *fetchrearch;
+@property (strong,nonatomic) NSArray *clothesArray;
+@property (nonatomic) Clothes *recentCloth1;
+@property (nonatomic) Clothes *recentCloth2;
 @end
 
 @implementation PickYourClothesViewController
@@ -24,10 +28,62 @@
 }
 -(void) viewWillAppear:(BOOL)animated{
     self.gooutPurpose.text=@"";
+    [self showRecent];
+}
+-(void) showRecent{
+    self.fetchrearch=nil;
+    NSFetchRequest *fetchRequest=[[NSFetchRequest alloc] init];
+    NSManagedObjectContext *moc=kAppDelegate.managedObjectContext;
+    NSEntityDescription *entity=[NSEntityDescription entityForName:@"Clothes" inManagedObjectContext:moc];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setFetchBatchSize:20];
+    NSSortDescriptor *sortDescriptor=[[NSSortDescriptor alloc]initWithKey:@"name" ascending:NO];
+    NSArray *sortDescription=[NSArray arrayWithObjects:sortDescriptor,nil];
+    [fetchRequest setSortDescriptors:sortDescription];
+    NSFetchedResultsController *aFetched=[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:moc sectionNameKeyPath:@"name" cacheName:nil];
+    aFetched.delegate=self;
+    self.fetchrearch=aFetched;
+    NSError *error=nil;
+    if (![self.fetchrearch performFetch:&error]) {
+        abort();
+    }
+    _clothesArray=[self.fetchrearch fetchedObjects];
+    NSMutableArray *clothesFilterArray=[[NSMutableArray alloc]init];
+    for(Clothes *cloth in _clothesArray){
+        if ([cloth.kindOf isEqualToString:@"Jacketing"]&&cloth.useTime!=0) {
+            [clothesFilterArray addObject:cloth];
+        }
+    }
+    NSArray *sortedArray=[self compareDate:clothesFilterArray];
+    NSInteger i=[sortedArray count];
+    _recentCloth1=sortedArray[i-1];
+
+    _recentCloth2=sortedArray[i-2];
+    NSData *clothImage1=_recentCloth1.image;
+    NSData *clothImage2=_recentCloth2.image;
+    [self.showRecent1 setBackgroundImage:[UIImage imageWithData:clothImage1] forState:UIControlStateNormal];
+    [self.showRecent2 setBackgroundImage:[UIImage imageWithData:clothImage2] forState:UIControlStateNormal];
+    
+    
+}
+-(NSString *) showTime:(NSDate *)date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *strDate = [dateFormatter stringFromDate:date];
+    return strDate;
+}
+-(NSArray *) compareDate:(NSArray *)originalArray{
+    NSArray *sortedArray = [originalArray sortedArrayUsingComparator:^(Clothes *obj1, Clothes *obj2){
+        NSDate *date1 = obj1.selectTime;
+        NSDate *date2 = obj2.selectTime;
+        return [date1 compare:date2];
+    }];
+    return sortedArray;
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self showRecent];
     self.start.layer.cornerRadius=20;
     NSArray *items = [NSArray arrayWithObjects:@"Exercise,Gym,Sports", @"Formal Occasion", @"Others", nil];
     self.gooutPurpose.items = items;
@@ -68,6 +124,57 @@
            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Oops" message:@"Please enter a purpose" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
         [alert show];
     }
+}
+
+- (IBAction)chooseRecent:(id)sender {
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Want Choose Again?" message:@"make a decision" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+    [alert show];
+    alert.tag=1;
+}
+
+- (IBAction)chooseRecent2:(id)sender {
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Want Choose Again?" message:@"make a decision" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+    [alert show];
+    alert.tag=2;
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"%i",buttonIndex);
+    if([alertView tag]==1)
+    switch (buttonIndex) {
+        case 0:
+            break;
+        case 1:
+        { NSDate *now=[NSDate date];
+           
+                [self save:_recentCloth1 atTime:now];
+            NSLog(@"this is tag 1");
+        }
+            break;
+    }else{
+        switch (buttonIndex) {
+            case 0:
+                break;
+            case 1:
+            { NSDate *now=[NSDate date];
+                
+                [self save:_recentCloth2 atTime:now];
+                [self showRecent];
+                 NSLog(@"this is tag 2");
+            }
+                break;
+    }
+}
+}
+-(void)save:(Clothes *)cloth atTime:(NSDate *)date{
+    NSManagedObjectID *clothID=[[NSManagedObjectID alloc]init];
+    clothID=[cloth objectID];
+    NSManagedObjectContext *moc=[kAppDelegate managedObjectContext];
+    NSManagedObject *object=[kAppDelegate.managedObjectContext objectWithID:clothID];
+    [object setValue:date forKeyPath:@"selectTime"];
+    [object setValue:[NSNumber numberWithInt:1+[cloth.useTime intValue]] forKeyPath:@"useTime"];
+    NSError *error;
+    [moc save:&error];
 }
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     if ([identifier isEqualToString:@"purpose"]&&[self.gooutPurpose.text length]==0) {

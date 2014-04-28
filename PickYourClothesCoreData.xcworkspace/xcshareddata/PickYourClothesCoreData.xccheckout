@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5418A1D2-F6AD-48B8-ADB0-739E1F88A44D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PickYourClothesCoreData</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9008894B-8B2C-4808-8078-30AF980CD13D</key>
+		<string>https://github.com/kevin0493559/PickYourClothes_Prototype3.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PickYourClothesCoreData.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9008894B-8B2C-4808-8078-30AF980CD13D</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/kevin0493559/PickYourClothes_Prototype3.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9008894B-8B2C-4808-8078-30AF980CD13D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9008894B-8B2C-4808-8078-30AF980CD13D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PickYourClothes_Prototype3</string>
+		</dict>
+	</array>
+</dict>
+</plist>
