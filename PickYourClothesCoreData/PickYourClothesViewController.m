@@ -55,6 +55,7 @@
             [clothesFilterArray addObject:cloth];
         }
     }
+        if([clothesFilterArray count]>1){
     NSArray *sortedArray=[self compareDate:clothesFilterArray];
     NSInteger i=[sortedArray count];
     _recentCloth1=sortedArray[i-1];
@@ -65,7 +66,7 @@
     [self.showRecent1 setBackgroundImage:[UIImage imageWithData:clothImage1] forState:UIControlStateNormal];
     [self.showRecent2 setBackgroundImage:[UIImage imageWithData:clothImage2] forState:UIControlStateNormal];
     }
-    
+    }
 }
 -(NSString *) showTime:(NSDate *)date{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
