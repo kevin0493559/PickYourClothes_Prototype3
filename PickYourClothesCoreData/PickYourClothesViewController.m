@@ -48,6 +48,7 @@
         abort();
     }
     _clothesArray=[self.fetchrearch fetchedObjects];
+    if([_clothesArray count]!=0){
     NSMutableArray *clothesFilterArray=[[NSMutableArray alloc]init];
     for(Clothes *cloth in _clothesArray){
         if ([cloth.kindOf isEqualToString:@"Jacketing"]&&cloth.useTime!=0) {
@@ -63,7 +64,7 @@
     NSData *clothImage2=_recentCloth2.image;
     [self.showRecent1 setBackgroundImage:[UIImage imageWithData:clothImage1] forState:UIControlStateNormal];
     [self.showRecent2 setBackgroundImage:[UIImage imageWithData:clothImage2] forState:UIControlStateNormal];
-    
+    }
     
 }
 -(NSString *) showTime:(NSDate *)date{
