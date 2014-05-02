@@ -10,5 +10,9 @@
 
 @interface WXController : UIViewController
 <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate,UITabBarControllerDelegate>
-
+@property (nonatomic) UILabel *temperatureLabel;
+@property (nonatomic) UILabel *hiloLabel;
+@property (nonatomic) UILabel *cityLabel;
+@property (nonatomic) UILabel *conditionsLabel;
+@property (nonatomic) UIImageView *iconView;
 @end
