@@ -48,24 +48,39 @@
         abort();
     }
     _clothesArray=[self.fetchrearch fetchedObjects];
+    
     if([_clothesArray count]!=0){
     NSMutableArray *clothesFilterArray=[[NSMutableArray alloc]init];
     for(Clothes *cloth in _clothesArray){
-        if ([cloth.kindOf isEqualToString:@"Jacketing"]&&cloth.useTime!=0) {
+        NSString *check=[self showTime:cloth.selectTime];
+        BOOL a=[check length]==0;
+        if ([cloth.kindOf isEqualToString:@"Jacketing"]&&!a) {
             [clothesFilterArray addObject:cloth];
         }
     }
-        if([clothesFilterArray count]>1){
-    NSArray *sortedArray=[self compareDate:clothesFilterArray];
-    NSInteger i=[sortedArray count];
-    _recentCloth1=sortedArray[i-1];
-
-    _recentCloth2=sortedArray[i-2];
-    NSData *clothImage1=_recentCloth1.image;
-    NSData *clothImage2=_recentCloth2.image;
-    [self.showRecent1 setBackgroundImage:[UIImage imageWithData:clothImage1] forState:UIControlStateNormal];
-    [self.showRecent2 setBackgroundImage:[UIImage imageWithData:clothImage2] forState:UIControlStateNormal];
-    }
+        if([clothesFilterArray count]>0){
+            NSArray *sortedArray=[self compareDate:clothesFilterArray];
+            NSInteger i=[sortedArray count];
+            _recentCloth1=sortedArray[i-1];
+            NSData *clothImage1=_recentCloth1.image;
+            [self.showRecent1 setBackgroundImage:[UIImage imageWithData:clothImage1] forState:UIControlStateNormal];
+            if([clothesFilterArray count]>1){
+                _recentCloth2=sortedArray[i-2];
+                NSData *clothImage2=_recentCloth2.image;
+                [self.showRecent2 setBackgroundImage:[UIImage imageWithData:clothImage2] forState:UIControlStateNormal];
+            }else{
+                [self.showRecent2 setBackgroundImage:nil forState:UIControlStateNormal];
+                self.showRecent2.enabled=NO;
+            }
+        }else{
+            [self.showRecent1 setBackgroundImage:nil forState:UIControlStateNormal];
+            self.showRecent1.enabled=NO;
+        }
+    }else{
+        self.showRecent1.enabled=NO;
+        self.showRecent2.enabled=NO;
+        [self.showRecent1 setBackgroundImage:nil forState:UIControlStateNormal];
+        [self.showRecent2 setBackgroundImage:nil forState:UIControlStateNormal];
     }
 }
 -(NSString *) showTime:(NSDate *)date{
@@ -85,7 +100,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self showRecent];
+//    [self showRecent];
     self.start.layer.cornerRadius=20;
     NSArray *items = [NSArray arrayWithObjects:@"Exercise,Gym,Sports", @"Formal Occasion", @"Others", nil];
     self.gooutPurpose.items = items;

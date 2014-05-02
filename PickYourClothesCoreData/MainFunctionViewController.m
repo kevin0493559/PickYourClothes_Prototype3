@@ -166,119 +166,116 @@
     }
     return filterArray;
 }
--(void)showSelection{
+-(void)showSelectionOfClothes{
+    _cloth=[Clothes alloc];
+    unsigned indexOfClothes;
+    NSMutableArray *clothesFilterArray2=[self generateFilterArray:_clothesFilterArray];
+    if ([clothesFilterArray2 count]!=0) {
+        self.lackOfClothes=NO;
+        indexOfClothes =arc4random() % [clothesFilterArray2 count];
+        _cloth=clothesFilterArray2[indexOfClothes];
+        NSData *clothesImageData= _cloth.image;
+        [self.PickedClothes setBackgroundImage:[UIImage imageWithData:clothesImageData] forState:UIControlStateNormal] ;
+    }else{
+        self.lackOfClothes=YES;
+        self.PickedClothes.enabled=NO;
+    }
+}
+-(void)showSelectionOfPants{
+    _pant=[Clothes alloc];
+    unsigned indexOfPants;
+    NSMutableArray *pantsFilterArray2=[self generateFilterArray:_pantsFilterArray];
+    if ([pantsFilterArray2 count]!=0) {
+        self.lackOfPants=NO;
+        if([self.purpose isEqualToString:@"Formal Occasion"]){
+            NSMutableArray *sameColorPants=[[NSMutableArray alloc]init];
+            for(Clothes *possibleClothes in pantsFilterArray2){
+                if ([possibleClothes.color isEqualToString:_cloth.color]) {
+                    [sameColorPants addObject:possibleClothes];
+                }
+            }
+            indexOfPants=arc4random() % [sameColorPants count];
+            _pant=sameColorPants[indexOfPants];
+        }else{
+            indexOfPants =arc4random() % [pantsFilterArray2 count];
+            _pant=pantsFilterArray2[indexOfPants];
+        }
+        NSData *pantsImageData=_pant.image;
+        [self.PickedPants setBackgroundImage:[UIImage imageWithData:pantsImageData] forState:UIControlStateNormal];
+    }else{
+        self.lackOfPants=YES;
+        self.PickedPants.enabled=NO;
+    }
+}
+-(void)showSelectionOfShoes{
+    _shoes=[Clothes alloc];
+    unsigned indexOfShoes;
+    NSMutableArray *shoesFilterArray2=[self generateFilterArray:_shoesFilterArray];
+    if ([shoesFilterArray2 count]!=0) {
+        self.lackOfShoes=NO;
+        indexOfShoes =arc4random() % [shoesFilterArray2 count];
+        _shoes=shoesFilterArray2[indexOfShoes];
+        NSData *shoesImageData=_shoes.image;
+        [self.PickedShoes setBackgroundImage:[UIImage imageWithData:shoesImageData] forState:UIControlStateNormal];
+    }else{
+        self.lackOfShoes=YES;
+        self.PickedShoes.enabled=NO;
+    }
+}
+-(void)showSelectionOfUmbrella{
+    Clothes *umbrella=[Clothes alloc];
+    NSMutableArray *umbrellaFilterArray2=[self generateFilterArray:_umbrellaFilterArray];
+    if([umbrellaFilterArray2 count]!=0){
+        self.lackOfUmbrellas=NO;
+        unsigned indexOfUmbrella =arc4random() % [umbrellaFilterArray2 count];
+        umbrella=umbrellaFilterArray2[indexOfUmbrella];
+        NSData *umbrellaImageData=umbrella.image;
+        [self.PickedUmbrella setBackgroundImage:[UIImage imageWithData:umbrellaImageData] forState:UIControlStateNormal];
+    }else{
+        self.lackOfUmbrellas=YES;
+        self.PickedUmbrella.enabled=NO;
+    }
+}
+-(void)showSelectionOfGlove{
+    Clothes *glove=[Clothes alloc];
+    NSMutableArray *gloveFilterArray2=[self generateFilterArray:_gloveFilterArray];
+    if([gloveFilterArray2 count]!=0){
+        self.lackOfGloves=NO;
+        unsigned indexOfGlove =arc4random() % [gloveFilterArray2 count];
+        glove=gloveFilterArray2[indexOfGlove];
+        NSData *gloveImageData=glove.image;
+        [self.PickedGlove setBackgroundImage:[UIImage imageWithData:gloveImageData] forState:UIControlStateNormal];
+    }else{
+        self.lackOfGloves=YES;
+        self.PickedGlove.enabled=NO;
+    }
+}
+-(void)showOriginal{
+    [self.PickedClothes setBackgroundImage:[UIImage imageNamed:@"originalShow_jacket"] forState:UIControlStateNormal];
+    [self.PickedPants setBackgroundImage:[UIImage imageNamed:@"originalShow_pant"] forState:UIControlStateNormal];
+    [self.PickedShoes setBackgroundImage:[UIImage imageNamed:@"originalShow_shoes"] forState:UIControlStateNormal];
+    [self.PickedUmbrella setBackgroundImage:[UIImage imageNamed:@"originalShow_umbrella"] forState:UIControlStateNormal];
+    [self.PickedGlove setBackgroundImage:[UIImage imageNamed:@"originalShow_glove"] forState:UIControlStateNormal];
+}
+-(void)showAllSelection{
     [self findClothes];
     if(_cnt!=0){
-        _cloth=[Clothes alloc];
-        _pant=[Clothes alloc];
-        _shoes=[Clothes alloc];
-        unsigned indexOfClothes;
-        unsigned indexOfPants;
-        unsigned indexOfShoes;
-        NSMutableArray *clothesFilterArray2=[self generateFilterArray:_clothesFilterArray];
-        NSMutableArray *pantsFilterArray2=[self generateFilterArray:_pantsFilterArray];
-        NSMutableArray *shoesFilterArray2=[self generateFilterArray:_shoesFilterArray];
-        
-//if([clothesFilterArray2 count]!=0 && [pantsFilterArray2 count]!=0 && [shoesFilterArray2 count]!=0){
-        if ([clothesFilterArray2 count]!=0) {
-            self.lackOfClothes=NO;
-            indexOfClothes =arc4random() % [clothesFilterArray2 count];
-            _cloth=clothesFilterArray2[indexOfClothes];
-            NSData *clothesImageData= _cloth.image;
-            self.PickedClothes.image=[UIImage imageWithData:clothesImageData];
-        }else{
-            self.lackOfClothes=YES;
-        }
-        if ([pantsFilterArray2 count]!=0) {
-            self.lackOfPants=NO;
-            if([self.purpose isEqualToString:@"Formal Occasion"]){
-                NSMutableArray *sameColorPants=[[NSMutableArray alloc]init];
-                for(Clothes *possibleClothes in pantsFilterArray2){
-                    if ([possibleClothes.color isEqualToString:_cloth.color]) {
-                        [sameColorPants addObject:possibleClothes];
-                    }
-                }
-                indexOfPants=arc4random() % [sameColorPants count];
-                _pant=sameColorPants[indexOfPants];
-            }else{
-                indexOfPants =arc4random() % [pantsFilterArray2 count];
-                 _pant=pantsFilterArray2[indexOfPants];
-            }
-            NSData *pantsImageData=_pant.image;
-            self.PickedPants.image=[UIImage imageWithData:pantsImageData];
-        }else{
-            self.lackOfPants=YES;
-        }
-        if ([shoesFilterArray2 count]!=0) {
-            self.lackOfShoes=NO;
-            indexOfShoes =arc4random() % [shoesFilterArray2 count];
-            _shoes=shoesFilterArray2[indexOfShoes];
-            NSData *shoesImageData=_shoes.image;
-            self.PickedShoes.image=[UIImage imageWithData:shoesImageData];
-        }else{
-            self.lackOfShoes=YES;
-        }
+        [self showSelectionOfClothes];
+        [self showSelectionOfPants];
+        [self showSelectionOfShoes];
         if (_needUmbrella) {
-            Clothes *umbrella=[Clothes alloc];
-            NSMutableArray *umbrellaFilterArray2=[self generateFilterArray:_umbrellaFilterArray];
-            if([umbrellaFilterArray2 count]!=0){
-                self.lackOfUmbrellas=NO;
-                unsigned indexOfUmbrella =arc4random() % [umbrellaFilterArray2 count];
-                umbrella=umbrellaFilterArray2[indexOfUmbrella];
-                NSData *umbrellaImageData=umbrella.image;
-                self.PickedUmbrella.image=[UIImage imageWithData:umbrellaImageData];
-            }else{
-                self.lackOfUmbrellas=YES;
-            }
+            [self showSelectionOfUmbrella];
+        }else{
+            self.PickedUmbrella.enabled=NO;
         }
         if (_needGlove) {
-            Clothes *glove=[Clothes alloc];
-            NSMutableArray *gloveFilterArray2=[self generateFilterArray:_gloveFilterArray];
-            if([gloveFilterArray2 count]!=0){
-                self.lackOfGloves=NO;
-                unsigned indexOfGlove =arc4random() % [gloveFilterArray2 count];
-                glove=gloveFilterArray2[indexOfGlove];
-                NSData *gloveImageData=glove.image;
-                self.PickedGlove.image=[UIImage imageWithData:gloveImageData];
-            }else{
-                self.lackOfGloves=YES;
-            }
+            [self showSelectionOfGlove];
+        }else{
+            self.PickedGlove.enabled=NO;
         }
-
+    }else{
+        [self showOriginal];
     }
-       //  indexOfClothes =arc4random() % [clothesFilterArray2 count];
-       //  indexOfPants =arc4random() % [pantsFilterArray2 count];
-       //  indexOfShoes =arc4random() % [shoesFilterArray2 count];
-        
-        
-       // if([self.purpose isEqualToString:@"Formal Occasion"]){
-          //  cloth=clothesFilterArray2[indexOfClothes];
-        //    NSMutableArray *sameColorPants=[[NSMutableArray alloc]init];
-//                for(Clothes *possibleClothes in pantsFilterArray2){
-//                    if ([possibleClothes.color isEqualToString:cloth.color]) {
-//                        [sameColorPants addObject:possibleClothes];
-//                    }
-//                }
-//            indexOfPants=arc4random() % [sameColorPants count];
-//            pant=sameColorPants[indexOfPants];
-//            shoes=shoesFilterArray2[indexOfShoes];
-//            
-//        }else{
-          //  cloth=clothesFilterArray2[indexOfClothes];
-          //  pant=pantsFilterArray2[indexOfPants];
-          //  shoes=shoesFilterArray2[indexOfShoes];
-            
-    
-      //  NSData *clothesImageData= cloth.image;
-//        NSData *pantsImageData=pant.image;
-     //   NSData *shoesImageData=shoes.image;
-        
-    //    self.PickedClothes.image=[UIImage imageWithData:clothesImageData];
-//        self.PickedPants.image=[UIImage imageWithData:pantsImageData];
-//        self.PickedShoes.image=[UIImage imageWithData:shoesImageData];
-        
-           //    NSLog(@"%@",cloth.type);
-    
     _cnt++;
 }
 
@@ -290,7 +287,7 @@
    // self.tabBarController.tabBar.hidden=NO;
   //  self.navigationController.navigationBar.alpha=1;
     _cnt=0;
-    [self showSelection];
+    [self showAllSelection];
     // Do any additional setup after loading the view.
 }
 
@@ -312,7 +309,7 @@
 */
 
 - (IBAction)PickClothes:(id)sender {
-    [self showSelection];
+    [self showAllSelection];
     if (self.lackOfClothes || (self.lackOfGloves && _needGlove) || self.lackOfPants || self.lackOfShoes || (self.lackOfUmbrellas && _needUmbrella)) {
         NSString *clothes=[[NSString alloc]init];
         if(self.lackOfClothes) {clothes=[_shouldPickClothes stringByAppendingString:@" Clothes,"];}else{ clothes=@"";}
@@ -344,6 +341,30 @@
 //    if(!self.lackOfShoes){
 //    _shoes.selectTime=now;
 //    }
+}
+
+- (IBAction)changeClothes:(id)sender {
+    [self showSelectionOfClothes];
+}
+
+- (IBAction)changePants:(id)sender {
+    [self showSelectionOfPants];
+}
+
+- (IBAction)changeShoes:(id)sender {
+    [self showSelectionOfShoes];
+}
+
+- (IBAction)changeGloves:(id)sender {
+    if (_needGlove) {
+        [self showSelectionOfGlove];
+    }
+}
+
+- (IBAction)changeUmbrellas:(id)sender {
+    if (_needUmbrella) {
+        [self showSelectionOfUmbrella];
+    }
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {

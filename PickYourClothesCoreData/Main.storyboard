@@ -822,10 +822,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cVg-pP-Fo5">
-                                <rect key="frame" x="103" y="94" width="114" height="180"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UW-X9-UBI">
                                 <rect key="frame" x="122" y="499" width="77" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -837,22 +833,61 @@
                                     <action selector="PickClothes:" destination="sN7-pz-roK" eventType="touchUpInside" id="23V-6f-Chd"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XrF-SO-aQP">
-                                <rect key="frame" x="103" y="275" width="114" height="128"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1pD-UV-uPi">
+                                <rect key="frame" x="114" y="125" width="92" height="117"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DkJ-Mg-Bol">
-                                <rect key="frame" x="103" y="404" width="114" height="69"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeClothes:" destination="sN7-pz-roK" eventType="touchUpInside" id="6Wg-gw-VbU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YFF-Zx-Lm2">
+                                <rect key="frame" x="114" y="250" width="92" height="117"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0q8-kp-Qdl">
-                                <rect key="frame" x="225" y="146" width="75" height="247"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changePants:" destination="sN7-pz-roK" eventType="touchUpInside" id="ECa-ql-FNn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHf-rP-SeV">
+                                <rect key="frame" x="14" y="214" width="92" height="117"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UlU-tJ-DXe">
-                                <rect key="frame" x="13" y="206" width="75" height="128"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeGloves:" destination="sN7-pz-roK" eventType="touchUpInside" id="vP6-Va-Xcc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVJ-F8-wc7">
+                                <rect key="frame" x="214" y="214" width="92" height="117"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeUmbrellas:" destination="sN7-pz-roK" eventType="touchUpInside" id="rkk-ru-KGb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6b-Ej-w0Y">
+                                <rect key="frame" x="114" y="375" width="92" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeShoes:" destination="sN7-pz-roK" eventType="touchUpInside" id="stz-0Z-7Bw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -864,11 +899,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="PickedClothes" destination="cVg-pP-Fo5" id="gZB-ug-vjj"/>
-                        <outlet property="PickedGlove" destination="UlU-tJ-DXe" id="iPj-TP-9Ar"/>
-                        <outlet property="PickedPants" destination="XrF-SO-aQP" id="hIS-es-3h3"/>
-                        <outlet property="PickedShoes" destination="DkJ-Mg-Bol" id="vRS-jD-qfB"/>
-                        <outlet property="PickedUmbrella" destination="0q8-kp-Qdl" id="jnm-IM-3Wy"/>
+                        <outlet property="PickedClothes" destination="1pD-UV-uPi" id="e99-Hv-xHN"/>
+                        <outlet property="PickedGlove" destination="hHf-rP-SeV" id="1BH-3H-uhz"/>
+                        <outlet property="PickedPants" destination="YFF-Zx-Lm2" id="KzS-z3-xyk"/>
+                        <outlet property="PickedShoes" destination="D6b-Ej-w0Y" id="CGQ-eD-qPk"/>
+                        <outlet property="PickedUmbrella" destination="SVJ-F8-wc7" id="7vA-Nr-YOf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TLu-iI-CpU" userLabel="First Responder" sceneMemberID="firstResponder"/>

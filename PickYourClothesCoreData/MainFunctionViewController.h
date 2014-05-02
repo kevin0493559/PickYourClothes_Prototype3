@@ -12,12 +12,17 @@
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong,nonatomic) NSFetchedResultsController *fetchrearch;
 @property NSString *purpose;
-@property (strong, nonatomic) IBOutlet UIImageView *PickedClothes;
-@property (strong, nonatomic) IBOutlet UIImageView *PickedPants;
-@property (strong, nonatomic) IBOutlet UIImageView *PickedShoes;
-@property (strong, nonatomic) IBOutlet UIImageView *PickedUmbrella;
-@property (strong, nonatomic) IBOutlet UIImageView *PickedGlove;
+@property (strong, nonatomic) IBOutlet UIButton *PickedClothes;
+@property (strong, nonatomic) IBOutlet UIButton *PickedPants;
+@property (strong, nonatomic) IBOutlet UIButton *PickedShoes;
+@property (strong, nonatomic) IBOutlet UIButton *PickedUmbrella;
+@property (strong, nonatomic) IBOutlet UIButton *PickedGlove;
 - (IBAction)PickClothes:(id)sender;
 - (IBAction)confirmChoice:(id)sender;
+- (IBAction)changeClothes:(id)sender;
+- (IBAction)changePants:(id)sender;
+- (IBAction)changeShoes:(id)sender;
+- (IBAction)changeGloves:(id)sender;
+- (IBAction)changeUmbrellas:(id)sender;
 
 @end
